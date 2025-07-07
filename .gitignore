@@ -361,3 +361,12 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Ignore Azure and Aidbox config files
+Aidbox_Sandbox_Config.json
+Azure_Security_Tokens.txt
+
+# Ignore docker-compose file for now
+docker-compose.yaml
+Azure-template.zip
+CreateDatabase.sql

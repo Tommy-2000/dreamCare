@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-dreamCare.MigrationService-01f7ac0d-0435-4a16-8709-8b63836951b9</UserSecretsId>
+  </PropertyGroup>
+
+    <ItemGroup>
+		<ProjectReference Include="..\dreamCare.ApiService\dreamCare.ApiService.csproj" />
+		<ProjectReference Include="..\dreamCare.ServiceDefaults\dreamCare.ServiceDefaults.csproj" />
+		<None Remove="Dockerfile" />
+	</ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.6" />
+  </ItemGroup>
+</Project>

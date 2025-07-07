@@ -1,0 +1,45 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36203.30
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dreamCare.AppHost", "dreamCare.AppHost\dreamCare.AppHost.csproj", "{F44555D6-8767-47EC-9728-ECDDCD6F0875}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dreamCare.ServiceDefaults", "dreamCare.ServiceDefaults\dreamCare.ServiceDefaults.csproj", "{A8C8AF0F-3074-6408-F804-ADA2BC1B658E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dreamCare.FHIRClient", "dreamCare.FHIRClient\dreamCare.FHIRClient.csproj", "{CF30A7A7-6812-4FB9-A6B5-A19B8F1658C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dreamCare.DICOMClient", "dreamCare.DICOMClient\dreamCare.DICOMClient.csproj", "{F653E805-D465-4765-B189-F4B9C1A117CC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F44555D6-8767-47EC-9728-ECDDCD6F0875}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F44555D6-8767-47EC-9728-ECDDCD6F0875}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F44555D6-8767-47EC-9728-ECDDCD6F0875}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F44555D6-8767-47EC-9728-ECDDCD6F0875}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8C8AF0F-3074-6408-F804-ADA2BC1B658E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8C8AF0F-3074-6408-F804-ADA2BC1B658E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8C8AF0F-3074-6408-F804-ADA2BC1B658E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8C8AF0F-3074-6408-F804-ADA2BC1B658E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF30A7A7-6812-4FB9-A6B5-A19B8F1658C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF30A7A7-6812-4FB9-A6B5-A19B8F1658C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF30A7A7-6812-4FB9-A6B5-A19B8F1658C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF30A7A7-6812-4FB9-A6B5-A19B8F1658C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F653E805-D465-4765-B189-F4B9C1A117CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F653E805-D465-4765-B189-F4B9C1A117CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F653E805-D465-4765-B189-F4B9C1A117CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F653E805-D465-4765-B189-F4B9C1A117CC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {052D24B2-41A1-42F0-A4F7-E9C597F1366C}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		dreamCare.Shared\dreamCare.Shared.projitems*{7e9d900b-eaf4-4096-a5a9-5c6a53b48f50}*SharedItemsImports = 13
+	EndGlobalSection
+EndGlobal
