@@ -33,7 +33,7 @@ class _CustomNavRailState extends ConsumerState<CustomNavRail> {
           padding: const EdgeInsets.all(10),
           child: SizedBox(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: List.generate(navScreens.length, (navIndex) {
                 return Column(
