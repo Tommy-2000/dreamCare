@@ -16,7 +16,9 @@ class _RootAppState extends State<RootApp> {
       debugShowCheckedModeBanner: false,
       title: 'dreamCare - EHR Platform',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
+        useMaterial3: true,
+        useSystemColors: true,
+        primarySwatch: Colors.teal 
       ),
       routerConfig: goRouter,
     );

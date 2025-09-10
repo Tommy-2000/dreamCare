@@ -6,13 +6,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
 Future<void> main() async {
-
-  // Ensure that all Flutter widgets are initialized
-  WidgetsFlutterBinding.ensureInitialized();
-
-  // Set the Url path strategy if the app is running in Web mode
-  if (kIsWeb) {
-    usePathUrlStrategy();
+  try {
+    // Ensure that all Flutter widgets are initialized
+    WidgetsFlutterBinding.ensureInitialized();
+  } catch (e) {
+    e.toString();
   }
 
   if (kDebugMode) {
@@ -20,7 +18,10 @@ Future<void> main() async {
     CachedNetworkImage.logLevel = CacheManagerLogLevel.debug;
   }
 
+  // Set the Url path strategy if the app is running in Web mode
+  if (kIsWeb) {
+    usePathUrlStrategy();
+  }
 
   runApp(ProviderScope(child: RootApp()));
 }
-

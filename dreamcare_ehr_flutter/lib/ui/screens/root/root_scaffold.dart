@@ -1,7 +1,7 @@
 import 'package:dreamcare_ehr_flutter/ui/common/navigation/custom_bottom_nav_bar.dart';
 import 'package:dreamcare_ehr_flutter/ui/common/navigation/custom_nav_rail.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/src/route.dart';
+import 'package:go_router/go_router.dart';
 
 class RootScaffold extends StatefulWidget {
   const RootScaffold({Key? key, required this.navigationShell})

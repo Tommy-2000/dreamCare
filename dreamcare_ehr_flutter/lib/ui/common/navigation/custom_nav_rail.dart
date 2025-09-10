@@ -1,4 +1,4 @@
-import 'package:dreamcare_ehr_flutter/ui/common/navigation/nav_screen_model.dart';
+import 'package:dreamcare_ehr_flutter/ui/common/navigation/nav_screens.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -25,46 +25,43 @@ class _CustomNavRailState extends ConsumerState<CustomNavRail> {
       print("CustomNavRail has been built");
     }
     return ClipRRect(
-      borderRadius: BorderRadius.all(Radius.circular(30)),
+      borderRadius: BorderRadius.circular(60),
       child: Container(
         color: Colors.teal,
+        width: 125,
         child: Padding(
-          padding: const EdgeInsets.all(30),
+          padding: const EdgeInsets.all(10),
           child: SizedBox(
             child: Column(
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.menu_rounded, color: Colors.white),
-                ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: List.generate(navScreenList.length, (navIndex) {
-                      return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: List.generate(navScreens.length, (navIndex) {
+                return Column(
+                  children: [
+                    MaterialButton(
+                      mouseCursor: SystemMouseCursors.click,
+                      focusColor: Colors.white,
+                      child: Column(
                         children: [
-                          IconButton(
-                            mouseCursor: SystemMouseCursors.click,
-                            focusColor: Colors.teal,
-                            icon: navScreenList[navIndex].navScreenIcon,
-                            onPressed: () {
-                              if (kDebugMode) {
-                                print("CustomNavRail button has been tapped");
-                              }
-                              GoBranch().goToBranch(
-                                navIndex,
-                                widget.navigationShell,
-                              );
-                            },
-                          ),
-                          navScreenList[navIndex].navScreenName
+                          Icon(navScreens[navIndex].navScreenIcon, color: Colors.white),
+                          Text(navScreens[navIndex].navScreenName, style: TextStyle(color: Colors.white)),
                         ],
-                      );
-                    }),
-                  ),
-                ),
-              ],
+                      ),
+                      onPressed: () {
+                        if (kDebugMode) {
+                          print(
+                            "CustomNavigationRail button has been tapped",
+                          );
+                        }
+                        GoBranch().goToBranch(
+                          navIndex,
+                          widget.navigationShell,
+                        );
+                      },
+                    ),
+                  ],
+                );
+              }),
             ),
           ),
         ),
