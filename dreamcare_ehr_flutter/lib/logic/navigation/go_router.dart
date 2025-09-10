@@ -21,4 +21,19 @@ final goRouter = GoRouter(initialLocation: "/dashboard", routes: [
       GoRoute(path: "/filespace", pageBuilder: (context, state) => MaterialPage(child: navScreens[3].navScreen)),
     ]),
   ])
-]);
+],
+redirect: (context, state) {
+      final validWebRoutes = [
+        '/dashboard',
+        '/appointments',
+        '/triage',
+        '/filespace',
+        '/account',
+        '/account/settings'
+      ];
+      if (!validWebRoutes.contains(state.uri.path)) {
+        return '/404';
+      } else {
+        return null;
+      }
+    });
