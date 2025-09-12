@@ -370,3 +370,8 @@ Azure_Security_Tokens.txt
 docker-compose.yaml
 Azure-template.zip
 CreateDatabase.sql
+
+# Ignore .idea and .vs folders for now
+.idea
+.vs
+
