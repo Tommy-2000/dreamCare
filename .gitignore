@@ -366,7 +366,7 @@ FodyWeavers.xsd
 Aidbox_Sandbox_Config.json
 Azure_Security_Tokens.txt
 
-# Ignore docker-compose file for now
+# Ignore misc files
 docker-compose.yaml
 Azure-template.zip
 CreateDatabase.sql
