@@ -372,8 +372,6 @@ Azure-template.zip
 CreateDatabase.sql
 
 # Ignore .idea and .vs folders for now
-.idea
-.idea/.idea.dreamCare
-.idea/.idea.dreamCare/.idea/libraries/vcs.xml
+/.idea
 .vs
 
