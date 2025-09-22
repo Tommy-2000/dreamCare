@@ -22,22 +22,17 @@ namespace dreamCare.FhirApi
         public FhirClient GetFhirClient()
         {
   
-            var aidboxClientUrl = _config["Aidbox_Client_Url"];
+            var aidboxClientConfig = _config["Aidbox_Client_Url"];
             
-            if (aidboxClientUrl != null)
+            if (aidboxClientConfig != null)
             {
 
-                // Configure authorization and logging handlers for FHIRClient
-                var authorizationHandler = new FhirAuthHandler();
+                // Configure logging message handlers for FHIRClient
+                var loggingHandler = new FhirLoggingHandler(_logger);
 
-                authorizationHandler.AuthorisationHeader = new AuthenticationHeaderValue("Authorization", $"Basic 03912j0932f203");
+                var aidBoxClientUri = new Uri(aidboxClientConfig);
                 
-                var loggingHandler = new FhirLoggingHandler(_logger)
-                {
-                    InnerHandler = authorizationHandler
-                };
-                
-                var fhirClient = new FhirClient(aidboxClientUrl, new FhirClientSettings
+                var fhirClient = new FhirClient(aidBoxClientUri, new FhirClientSettings
                 {
                     PreferredFormat = ResourceFormat.Json,
                     UseAsync = true,

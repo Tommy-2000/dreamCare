@@ -37,9 +37,14 @@ try
         app.MapOpenApi();
         app.UseDeveloperExceptionPage();
     }
-    
+
+    // Add CORS to allow for the Flutter Client to access the API
+    app.UseCors("flutterClientAccess");
+
     // Enable authentication middleware
     app.UseAuthentication();
+
+    // Enable authorization middleware
     app.UseAuthorization();
 
     // Map endpoints here

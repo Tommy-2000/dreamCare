@@ -1,5 +1,4 @@
-﻿using System.Security.Claims;
-using dreamCare.FhirApi.Exceptions;
+﻿using dreamCare.FhirApi.Exceptions;
 using dreamCare.FhirApi.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -7,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Serilog.Templates;
 using Serilog.Templates.Themes;
+using System.Security.Claims;
 
 namespace dreamCare.FhirApi
 {
@@ -24,13 +24,6 @@ namespace dreamCare.FhirApi
             {
                 options.LowercaseUrls = true;
                 options.LowercaseQueryStrings = true;
-            });
-
-            // Add support for Cors when connecting this project to the Flutter client
-            apiServices.AddCors(option =>
-            {
-                option.AddPolicy(
-                    "flutterClientAccess", builder => { builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); });
             });
 
             // Add OpenAPI documentation to FhirApi
@@ -57,10 +50,10 @@ namespace dreamCare.FhirApi
                 {
                     options.Authority = auth0Domain;
                     options.Audience = apiConfig["Auth0_Audience"];
-                    // options.TokenValidationParameters = new TokenValidationParameters
-                    // {
-                    //     NameClaimType = ClaimTypes.NameIdentifier
-                    // };
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        NameClaimType = ClaimTypes.NameIdentifier
+                    };
                 });
 
             // Add Authorization with permissions set by Auth0
@@ -73,23 +66,33 @@ namespace dreamCare.FhirApi
                 options.AddPolicy("write:patients",
                     policy => policy.Requirements.Add(
                         new FhirAuthScopeRequirement("write:patients", auth0Domain)));
-                // Practitioner permissions
-                options.AddPolicy("read:practitioner",
+                // DiagnositcReport permissions
+                options.AddPolicy("read:diagnosticreports",
                     policy => policy.Requirements.Add(
-                        new FhirAuthScopeRequirement("read:practitioner", auth0Domain)));
-                options.AddPolicy("write:practitioner",
+                        new FhirAuthScopeRequirement("read:diagnosticreports", auth0Domain)));
+                options.AddPolicy("write:diagnosticreports",
                     policy => policy.Requirements.Add(
-                        new FhirAuthScopeRequirement("write:practitioner", auth0Domain)));
+                        new FhirAuthScopeRequirement("write:diagnosticreports", auth0Domain)));              
             });
-            
+
+
+            // Add AuthorisationHandler to a singleton with the fhirAuthScopeHandler
+            apiServices.AddSingleton<IAuthorizationHandler, FhirAuthScopeHandler>();
+
+
+            // Add support for Cors when connecting this project to the Flutter client
+            apiServices.AddCors(option =>
+            {
+                option.AddPolicy(
+                    "flutterClientAccess", builder => { builder.WithOrigins("http://locahost:8080").AllowAnyMethod().AllowAnyHeader().AllowCredentials(); });
+            });
+
             // Add ExceptionHandler
             apiServices.AddExceptionHandler<GlobalExceptionHandler>();
 
             // Add Endpoints with an EndpointsApiExplorer
             apiServices.AddEndpointsApiExplorer();
             
-            // Add AuthorisationHandler to a singleton with the fhirAuthScopeHandler
-            apiServices.AddSingleton<IAuthorizationHandler>();
             
             // Return configured ApiServices
             return apiServices;
