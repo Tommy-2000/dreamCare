@@ -361,3 +361,18 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Ignore Aidbox config files
+Aidbox_Sandbox_Config.json
+Aidbox_IdentityProvider.txt
+
+# Ignore misc files
+docker-compose.yaml
+Azure-template.zip
+CreateDatabase.sql
+
+# Ignore .idea and .vs folders for now
+/.idea
+.vs
+
+/Aidbox_ID_Config.txt

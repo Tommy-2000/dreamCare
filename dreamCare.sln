@@ -6,15 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dreamCare.AppHost", "dreamC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dreamCare.ServiceDefaults", "dreamCare.ServiceDefaults\dreamCare.ServiceDefaults.csproj", "{A8C8AF0F-3074-6408-F804-ADA2BC1B658E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dreamCare.ApiService", "dreamCare.ApiService\dreamCare.ApiService.csproj", "{30FA9B39-31B4-8047-99EA-6FD5C92AEBD5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dreamCare.ClientStub", "dreamCare.ClientStub\dreamCare.ClientStub.csproj", "{76062B51-8F19-7CBB-022E-EB081DA3AB92}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dreamCare.MigrationService", "dreamCare.MigrationService\dreamCare.MigrationService.csproj", "{439BFDEA-575F-427C-881D-8503CA0B4F0D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dreamCare.MAUIApp", "dreamCare.MAUIApp\dreamCare.MAUIApp.csproj", "{A2CDE342-D1DA-32ED-FFE3-434FBABD0979}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dreamCare.WebApp", "dreamCare.WebApp\dreamCare.WebApp.csproj", "{486EE13F-67A8-BA1C-8F9E-50CA3DF2D8EA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dreamCare.FhirApi", "dreamCare.FhirApi\dreamCare.FhirApi.csproj", "{8109108D-A329-46D2-A9FC-5BA04FFF6AB2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,28 +22,10 @@ Global
 		{A8C8AF0F-3074-6408-F804-ADA2BC1B658E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8C8AF0F-3074-6408-F804-ADA2BC1B658E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8C8AF0F-3074-6408-F804-ADA2BC1B658E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{30FA9B39-31B4-8047-99EA-6FD5C92AEBD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{30FA9B39-31B4-8047-99EA-6FD5C92AEBD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{30FA9B39-31B4-8047-99EA-6FD5C92AEBD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{30FA9B39-31B4-8047-99EA-6FD5C92AEBD5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{76062B51-8F19-7CBB-022E-EB081DA3AB92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{76062B51-8F19-7CBB-022E-EB081DA3AB92}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{76062B51-8F19-7CBB-022E-EB081DA3AB92}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{76062B51-8F19-7CBB-022E-EB081DA3AB92}.Release|Any CPU.Build.0 = Release|Any CPU
-		{439BFDEA-575F-427C-881D-8503CA0B4F0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{439BFDEA-575F-427C-881D-8503CA0B4F0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{439BFDEA-575F-427C-881D-8503CA0B4F0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{439BFDEA-575F-427C-881D-8503CA0B4F0D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A2CDE342-D1DA-32ED-FFE3-434FBABD0979}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A2CDE342-D1DA-32ED-FFE3-434FBABD0979}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A2CDE342-D1DA-32ED-FFE3-434FBABD0979}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{A2CDE342-D1DA-32ED-FFE3-434FBABD0979}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A2CDE342-D1DA-32ED-FFE3-434FBABD0979}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A2CDE342-D1DA-32ED-FFE3-434FBABD0979}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{486EE13F-67A8-BA1C-8F9E-50CA3DF2D8EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{486EE13F-67A8-BA1C-8F9E-50CA3DF2D8EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{486EE13F-67A8-BA1C-8F9E-50CA3DF2D8EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{486EE13F-67A8-BA1C-8F9E-50CA3DF2D8EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8109108D-A329-46D2-A9FC-5BA04FFF6AB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8109108D-A329-46D2-A9FC-5BA04FFF6AB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8109108D-A329-46D2-A9FC-5BA04FFF6AB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8109108D-A329-46D2-A9FC-5BA04FFF6AB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
