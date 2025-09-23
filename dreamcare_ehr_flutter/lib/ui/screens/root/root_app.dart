@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../logic/navigation/go_router.dart';
+import '../../../logic/navigation/app_go_router.dart';
 
 class RootApp extends StatefulWidget {
   const RootApp({super.key});
@@ -20,7 +20,7 @@ class _RootAppState extends State<RootApp> {
         useSystemColors: true,
         primarySwatch: Colors.teal 
       ),
-      routerConfig: goRouter,
+      routerConfig: AppGoRouter().parentGoRouter,
     );
   }
 }

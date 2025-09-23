@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:dreamcare_ehr_flutter/logic/navigation/go_branch.dart';
+import 'package:dreamcare_ehr_flutter/logic/navigation/app_go_branch.dart';
 import 'package:dreamcare_ehr_flutter/ui/common/navigation/nav_screens.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +47,7 @@ class _CustomBottomNavBarState extends ConsumerState<CustomBottomNavBar> {
                           if (kDebugMode) {
                             print("CustomBottomNavBar button has been tapped")
                           },
-                          GoBranch().goToBranch(navIndex, widget.navigationShell),
+                          AppGoBranch().goToBranch(navIndex, widget.navigationShell),
                         },
                       ),
                       Text(navScreens[navIndex].navScreenName, style: TextStyle(color: Colors.white))
