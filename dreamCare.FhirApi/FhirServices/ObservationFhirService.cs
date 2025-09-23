@@ -1,8 +1,9 @@
 ﻿using Hl7.Fhir.Model;
+using Hl7.Fhir.Rest;
 
-namespace dreamCare.FhirApi.ClientServices
+namespace dreamCare.FhirApi.FhirServices
 {
-    public class ObservationClientService(Hl7.Fhir.Rest.FhirClient fhirClient)
+    public class ObservationFhirService(FhirClient fhirClient)
     {
         
         public async Task<Observation?> GetObservationById(Id observationId)
@@ -50,7 +51,21 @@ namespace dreamCare.FhirApi.ClientServices
             var observation = await fhirClient.ReadAsync<Observation>($"fhir/Observation?address=\"{patientAddress}\"");
             return observation;
         }
-        
-        
+
+        public async Task<Observation?> RefreshObservation(Observation observation)
+        {
+            return await fhirClient.RefreshAsync(observation);
+        }
+
+        public async Task<Observation?> CreateObservation(Observation observation)
+        {
+            return await fhirClient.CreateAsync(observation);
+        }
+
+        public async Task<Observation?> UpdateObservation(Observation observation)
+        {
+            return await fhirClient.UpdateAsync(observation);
+        }
+
     }
 }

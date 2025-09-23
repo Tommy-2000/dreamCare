@@ -1,4 +1,6 @@
-﻿using dreamCare.FhirApi.Aidbox.HL7_Fhir_R4_Core;
+﻿
+using dreamCare.FhirApi.FhirServices;
+using Hl7.Fhir.Model;
 
 namespace dreamCare.FhirApi.Endpoints;
 
@@ -6,41 +8,31 @@ public static class ConditionEndpoints
 {
     public static void MapConditionEndpoints (this IEndpointRouteBuilder routes)
     {
-        var group = routes.MapGroup("/api/Condition").WithTags(nameof(Condition));
+        var group = routes.MapGroup("/fhir/Condition").WithTags(nameof(Condition));
 
-        group.MapGet("/", () =>
+        group.MapGet("/{id}", (Id conditionId, Condition inputCondition, ConditionFhirService conditionFhirService) =>
         {
-            return new [] { new Condition.ConditionEvidence() };
-        })
-        .WithName("GetAllConditions")
-        .WithOpenApi();
-
-        group.MapGet("/{id}", (int id) =>
-        {
-            //return new Condition { ID = id };
+            var returnedCondition = conditionFhirService.GetConditionById(conditionId);
+            return TypedResults.Ok(returnedCondition);
         })
         .WithName("GetConditionById")
         .WithOpenApi();
 
-        group.MapPut("/{id}", (int id, Condition input) =>
+        group.MapPut("/{id}", (Id conditionId, Condition inputCondition, ConditionFhirService conditionFhirService) =>
         {
-            return TypedResults.NoContent();
+            var returnedCondition = conditionFhirService.UpdateCondition(inputCondition);
+            return TypedResults.Ok(returnedCondition);
         })
         .WithName("UpdateCondition")
         .WithOpenApi();
 
-        group.MapPost("/", (Condition model) =>
+        group.MapPost("/", (Condition inputCondition, ConditionFhirService conditionFhirService) =>
         {
-            //return TypedResults.Created($"/api/Conditions/{model.ID}", model);
+            var returnedCondition = conditionFhirService.CreateCondition(inputCondition);
+            return TypedResults.Created($"/fhir/Condition/{returnedCondition.Id}", returnedCondition);
         })
         .WithName("CreateCondition")
         .WithOpenApi();
 
-        group.MapDelete("/{id}", (int id) =>
-        {
-            //return TypedResults.Ok(new Condition { ID = id });
-        })
-        .WithName("DeleteCondition")
-        .WithOpenApi();
     }
 }

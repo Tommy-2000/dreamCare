@@ -1,4 +1,6 @@
-﻿using dreamCare.FhirApi.Aidbox.HL7_Fhir_R4_Core;
+﻿
+using dreamCare.FhirApi.FhirServices;
+using Hl7.Fhir.Model;
 
 namespace dreamCare.FhirApi.Endpoints;
 
@@ -6,41 +8,30 @@ public static class ObservationEndpoints
 {
     public static void MapObservationEndpoints (this IEndpointRouteBuilder routes)
     {
-        var group = routes.MapGroup("/api/Observation").WithTags(nameof(Observation));
+        var group = routes.MapGroup("/fhir/Observation").WithTags(nameof(Observation));
 
-        group.MapGet("/", () =>
+        group.MapGet("/{id}", (Id observationId, Observation inputObservation, ObservationFhirService observationFhirService) =>
         {
-            //return new [] { new Observation() };
-        })
-        .WithName("GetAllObservations")
-        .WithOpenApi();
-
-        group.MapGet("/{id}", (int id) =>
-        {
-            //return new Observation { ID = id };
+            var returnedObservation = observationFhirService.GetObservationById(observationId);
+            return TypedResults.Ok(returnedObservation);
         })
         .WithName("GetObservationById")
         .WithOpenApi();
 
-        group.MapPut("/{id}", (int id, Observation input) =>
+        group.MapPut("/{id}", (Id observationId, Observation inputObservation, ObservationFhirService observationFhirService) =>
         {
-            return TypedResults.NoContent();
+            var returnedObservation = observationFhirService.UpdateObservation(inputObservation);
+            return TypedResults.Ok(returnedObservation);
         })
         .WithName("UpdateObservation")
         .WithOpenApi();
 
-        group.MapPost("/", (Observation model) =>
+        group.MapPost("/", (Observation inputObservation, ObservationFhirService observationFhirService) =>
         {
-            //return TypedResults.Created($"/api/Observations/{model.ID}", model);
+            var returnedObservation = observationFhirService.CreateObservation(inputObservation);
+            return TypedResults.Created($"/fhir/Observation/{returnedObservation.Id}", returnedObservation);
         })
         .WithName("CreateObservation")
-        .WithOpenApi();
-
-        group.MapDelete("/{id}", (int id) =>
-        {
-            //return TypedResults.Ok(new Observation { ID = id });
-        })
-        .WithName("DeleteObservation")
         .WithOpenApi();
     }
 }

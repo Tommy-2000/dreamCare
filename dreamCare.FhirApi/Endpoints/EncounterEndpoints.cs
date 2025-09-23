@@ -1,4 +1,6 @@
-﻿using dreamCare.FhirApi.Aidbox.HL7_Fhir_R4_Core;
+﻿
+using dreamCare.FhirApi.FhirServices;
+using Hl7.Fhir.Model;
 
 namespace dreamCare.FhirApi.Endpoints;
 
@@ -6,23 +8,17 @@ public static class EncounterEndpoints
 {
     public static void MapEncounterEndpoints (this IEndpointRouteBuilder routes)
     {
-        var group = routes.MapGroup("/api/Encounter").WithTags(nameof(Encounter));
+        var group = routes.MapGroup("/fhir/Encounter").WithTags(nameof(Encounter));
 
-        group.MapGet("/", () =>
+        group.MapGet("/{id}", (Id encounterId, Encounter inputEncounter, EncounterFhirService encounterFhirService) =>
         {
-            //return new [] { new Encounter() };
-        })
-        .WithName("GetAllEncounters")
-        .WithOpenApi();
-
-        group.MapGet("/{id}", (int id) =>
-        {
-            //return new Encounter { ID = id };
+            var returnedEncounter = encounterFhirService.GetEncounterById(encounterId);
+            return TypedResults.Ok(returnedEncounter);
         })
         .WithName("GetEncounterById")
         .WithOpenApi();
 
-        group.MapPut("/{id}", (int id, Encounter input) =>
+        group.MapPut("/{id}", (Id encounterId, Encounter inputEncounter, EncounterFhirService encounterFhirService) =>
         {
             return TypedResults.NoContent();
         })

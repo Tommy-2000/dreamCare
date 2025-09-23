@@ -1,21 +1,21 @@
 ﻿using dreamCare.FhirApi.Exceptions;
 using dreamCare.FhirApi.Security;
+using Hl7.Fhir.Rest;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
-using Serilog.Templates;
-using Serilog.Templates.Themes;
 using System.Security.Claims;
 
 namespace dreamCare.FhirApi
 {
     public static class ApiServices
     {
+
         public static IServiceCollection AddApiServices(this IServiceCollection apiServices, IConfiguration apiConfig)
         {
             // Configure Aidbox headers and token validation
-            apiServices.AddOptions<AidboxClient>()
+            apiServices.AddOptions<FhirClient>()
                 .ValidateDataAnnotations()
                 .ValidateOnStart();
 
@@ -31,15 +31,6 @@ namespace dreamCare.FhirApi
 
             // Add services that catch failed requests
             apiServices.AddProblemDetails();
-
-            // Add Serilog logging to the FhirApi
-            apiServices.AddSerilog((services, lc) => lc.ReadFrom.Configuration(apiConfig)
-                .ReadFrom.Services(services)
-                .Enrich.FromLogContext()
-                .WriteTo.Console(new ExpressionTemplate(
-                    "[{@t:HH:mm:ss} {@l:u3}{#if @tr is not null} ({substring(@tr,0,4)}:{substring(@sp,0,4)}){#end}] {@m}\n{@x}",
-                    theme: TemplateTheme.Code
-                )));
 
             // Add JWT Token Authentication from Auth0
 
@@ -72,13 +63,16 @@ namespace dreamCare.FhirApi
                         new FhirAuthScopeRequirement("read:diagnosticreports", auth0Domain)));
                 options.AddPolicy("write:diagnosticreports",
                     policy => policy.Requirements.Add(
-                        new FhirAuthScopeRequirement("write:diagnosticreports", auth0Domain)));              
+                        new FhirAuthScopeRequirement("write:diagnosticreports", auth0Domain)));
             });
 
 
             // Add AuthorisationHandler to a singleton with the fhirAuthScopeHandler
             apiServices.AddSingleton<IAuthorizationHandler, FhirAuthScopeHandler>();
 
+
+            // Add FhirClient as a HttpClient
+            apiServices.AddHttpClient<FhirClient>();
 
             // Add support for Cors when connecting this project to the Flutter client
             apiServices.AddCors(option =>
@@ -92,10 +86,37 @@ namespace dreamCare.FhirApi
 
             // Add Endpoints with an EndpointsApiExplorer
             apiServices.AddEndpointsApiExplorer();
-            
-            
+
+
             // Return configured ApiServices
             return apiServices;
         }
+
+        public static FhirClient GetFhirClient(IConfiguration config)
+        {
+            var aidboxClientUrl = config["Aidbox_Client_Url"];
+
+            if (aidboxClientUrl != null)
+            {
+                // Configure logging message handlers for FHIRClient
+                var loggingHandler = new FhirLoggingHandler(Log.Logger);
+
+                var aidBoxClientUri = new Uri(aidboxClientUrl);
+
+                var fhirClient = new FhirClient(aidBoxClientUri, new FhirClientSettings
+                {
+                    PreferredFormat = ResourceFormat.Json,
+                    UseAsync = true,
+                    VerifyFhirVersion = true
+                }, loggingHandler);
+
+                return fhirClient;
+            }
+            else
+            {
+                throw new InvalidOperationException("Aidbox Client Config is null, please add necessary parameters to secrets.json");
+            }
+        }
+
     }
 }

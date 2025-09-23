@@ -1,4 +1,5 @@
-﻿using dreamCare.FhirApi.Aidbox.HL7_Fhir_R4_Core;
+﻿using dreamCare.FhirApi.FhirServices;
+using Hl7.Fhir.Model;
 
 namespace dreamCare.FhirApi.Endpoints;
 
@@ -6,41 +7,30 @@ public static class PractitionerEndpoints
 {
     public static void MapPractitionerEndpoints (this IEndpointRouteBuilder routes)
     {
-        var group = routes.MapGroup("/api/Practitioner").WithTags(nameof(Practitioner));
+        var group = routes.MapGroup("/fhir/Practitioner").WithTags(nameof(Practitioner));
 
-        group.MapGet("/", () =>
+        group.MapGet("/{id}", (Id practitionerId, Practitioner inputPractitioner, PractitionerFhirService practitionerFhirService) =>
         {
-            return new [] { new Practitioner() };
-        })
-        .WithName("GetAllPractitioners")
-        .WithOpenApi();
-
-        group.MapGet("/{id}", (int id) =>
-        {
-            //return new Practitioner { ID = id };
+            var returnedPractitioner = practitionerFhirService.GetPractitionerById(practitionerId);
+            return TypedResults.Ok(returnedPractitioner);
         })
         .WithName("GetPractitionerById")
         .WithOpenApi();
 
-        group.MapPut("/{id}", (int id, Practitioner input) =>
+        group.MapPut("/{id}", (Id practitionerId, Practitioner inputPractitioner, PractitionerFhirService practitionerFhirService) =>
         {
-            return TypedResults.NoContent();
+            var returnedPractitioner = practitionerFhirService.UpdatePractitioner(inputPractitioner);
+            return TypedResults.Ok(returnedPractitioner);
         })
-        .WithName("UpdatePractitioner")
+        .WithName("UpdatePatientById")
         .WithOpenApi();
 
-        group.MapPost("/", (Practitioner model) =>
+        group.MapPost("/", (Practitioner inputPractitioner, PractitionerFhirService practitionerFhirService) =>
         {
-            //return TypedResults.Created($"/api/Practitioners/{model.ID}", model);
+            var returnedPractitioner = practitionerFhirService.CreatePractitioner(inputPractitioner);
+            return TypedResults.Created($"/fhir/Practitioner/{returnedPractitioner.Id}", returnedPractitioner);
         })
-        .WithName("CreatePractitioner")
-        .WithOpenApi();
-
-        group.MapDelete("/{id}", (int id) =>
-        {
-            //return TypedResults.Ok(new Practitioner { ID = id });
-        })
-        .WithName("DeletePractitioner")
+        .WithName("CreatePatient")
         .WithOpenApi();
     }
 }

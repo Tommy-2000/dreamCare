@@ -1,46 +1,39 @@
-﻿using dreamCare.FhirApi.Aidbox.HL7_Fhir_R4_Core;
+﻿using dreamCare.FhirApi.FhirServices;
+using Hl7.Fhir.Model;
 
 namespace dreamCare.FhirApi.Endpoints;
 
 public static class PatientEndpoints
 {
+
     public static void MapPatientEndpoints (this IEndpointRouteBuilder routes)
     {
-        var group = routes.MapGroup("/api/Patient").WithTags(nameof(Patient));
+        var group = routes.MapGroup("/fhir/Patient").WithTags(nameof(Patient));
 
-        group.MapGet("/", () =>
+        group.MapGet("/{id}", (Id patientId, PatientFhirService patientFhirService) =>
         {
-            return new [] { new Patient() };
-        })
-        .WithName("GetAllPatients")
-        .WithOpenApi();
-
-        group.MapGet("/{id}", (int id) =>
-        {
-            //return new Patient { ID = id };
+            var returnedPatient = patientFhirService.GetPatientById(patientId);
+            return TypedResults.Ok(returnedPatient);
         })
         .WithName("GetPatientById")
         .WithOpenApi();
 
-        group.MapPut("/{id}", (int id, Patient input) =>
+        group.MapPut("/{id}", (Id patientId, Patient inputPatient, PatientFhirService patientFhirService) =>
         {
-            return TypedResults.NoContent();
+            var returnedPatient = patientFhirService.UpdatePatient(inputPatient);
+            return TypedResults.Ok(returnedPatient);
         })
-        .WithName("UpdatePatient")
+        .WithName("UpdatePatientById")
         .WithOpenApi();
 
-        group.MapPost("/", (Patient model) =>
+        group.MapPost("/", (Patient inputPatient, PatientFhirService patientFhirService) =>
         {
-            //return TypedResults.Created($"/api/Patients/{model.ID}", model);
+            var returnedPatient = patientFhirService.CreatePatient(inputPatient);
+            return TypedResults.Created($"/fhir/Patient/{returnedPatient.Id}", returnedPatient);
         })
         .WithName("CreatePatient")
         .WithOpenApi();
 
-        group.MapDelete("/{id}", (int id) =>
-        {
-            //return TypedResults.Ok(new Patient { ID = id });
-        })
-        .WithName("DeletePatient")
-        .WithOpenApi();
+
     }
 }
