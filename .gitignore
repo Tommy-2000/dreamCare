@@ -363,8 +363,9 @@ MigrationBackup/
 FodyWeavers.xsd
 
 # Ignore Aidbox config files
-Aidbox_Sandbox_Config.json
+Aidbox_Policy_Config.json
 Aidbox_IdentityProvider.txt
+Aidbox_IdentityProviderResponse.txt
 
 # Ignore misc files
 docker-compose.yaml
@@ -375,4 +376,3 @@ CreateDatabase.sql
 /.idea
 .vs
 
-/Aidbox_ID_Config.txt
