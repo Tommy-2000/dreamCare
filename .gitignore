@@ -363,8 +363,9 @@ MigrationBackup/
 FodyWeavers.xsd
 
 # Ignore Aidbox config files
-Aidbox_Sandbox_Config.json
+Aidbox_Policy_Config.json
 Aidbox_IdentityProvider.txt
+Aidbox_IdentityProviderResponse.txt
 
 # Ignore misc files
 docker-compose.yaml
@@ -375,4 +376,11 @@ CreateDatabase.sql
 /.idea
 .vs
 
-/Aidbox_ID_Config.txt
+
+# Ignore unnecessary Flutter build folders
+/dreamcare_ehr_flutter/windows
+/dreamcare_ehr_flutter/macos
+/dreamcare_ehr_flutter/linux
+
+# Ignore .idea folder in Flutter repo
+/dreamcare_ehr_flutter/.idea
