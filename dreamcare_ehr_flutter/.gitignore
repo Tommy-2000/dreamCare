@@ -46,6 +46,7 @@ app.*.map.json
 
 
 # Ignore the windows, macos and linux builds
-windows
-macos
-linux
+/windows/
+/macos/
+/linux/
+/.idea/
