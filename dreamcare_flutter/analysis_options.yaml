@@ -1,0 +1,24 @@
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    prefer_relative_imports: true
+
+analyzer:
+
+#  plugins:
+#    - custom_lint
+
+  errors:
+    invalid_annotation_target: ignore
+
+
+#custom_lint:
+#  rules:
+#    - missing_provider_scope
+#    - provider_parameters
+#    - avoid_public_notifier_properties
+#    - avoid_ref_inside_state_dispose
+#    - async_value_nullable_pattern
+#    - protected_notifier_properties
+
