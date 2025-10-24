@@ -4,10 +4,11 @@ import 'package:gap/gap.dart';
 import '../../../styles/colours.dart';
 
 class PrimaryButton extends StatefulWidget {
-  const PrimaryButton({super.key, required this.buttonText, this.buttonIcon});
+  const PrimaryButton({super.key, required this.buttonText, this.buttonIcon, this.buttonOnPressed});
 
   final String buttonText;
   final Icon? buttonIcon;
+  final Function? buttonOnPressed;
 
   @override
   State<PrimaryButton> createState() => _PrimaryButtonState();
@@ -18,10 +19,12 @@ class _PrimaryButtonState extends State<PrimaryButton> {
   Widget build(BuildContext context) {
     return MaterialButton(
       color: primaryThemeColour,
-      textColor: whiteTextColour,
+      textColor: secondaryTextColour,
       shape: StadiumBorder(),
       mouseCursor: SystemMouseCursors.click,
-      onPressed: () {},
+      onPressed: () {
+        widget.buttonOnPressed;
+      },
       child: Row(
         children: [
           Text(widget.buttonText),

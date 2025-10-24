@@ -35,7 +35,7 @@ class _PieChartCardState extends ConsumerState<PieChartCard> {
           Text(
             widget.chartTitle!,
             style: GoogleFonts.montserrat(
-              color: blackTextColour,
+              color: primaryTextColour,
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),

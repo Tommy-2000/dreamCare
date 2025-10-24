@@ -48,7 +48,7 @@ class _BarChartCardState extends ConsumerState<BarChartCard> {
           Text(
             widget.chartTitle!,
             style: GoogleFonts.montserrat(
-              color: blackTextColour,
+              color: primaryTextColour,
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
@@ -234,7 +234,7 @@ class _BarChartCardState extends ConsumerState<BarChartCard> {
 
   Widget getTitles(double value, TitleMeta meta) {
     const style = TextStyle(
-      color: blackTextColour,
+      color: primaryTextColour,
       fontWeight: FontWeight.bold,
       fontSize: 14,
     );

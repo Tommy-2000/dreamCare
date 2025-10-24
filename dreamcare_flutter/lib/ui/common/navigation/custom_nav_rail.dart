@@ -47,7 +47,7 @@ class _CustomNavRailState extends ConsumerState<CustomNavRail> {
                         focusColor: Colors.white,
                         child: Column(
                           children: [
-                            Icon(navScreens[navIndex].navScreenIcon, color: Colors.white),
+                            navScreens[navIndex].navScreenIcon,
                             Text(navScreens[navIndex].navScreenName, style: TextStyle(color: Colors.white)),
                           ],
                         ),

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../ui_event.dart';
-import '../ui_state.dart';
+
+import '../../state/common_event.dart';
+import '../../state/common_state.dart';
 import 'content_card.dart';
 
-class DailyCalendarCard extends ConsumerStatefulWidget with UIState, UIEvent {
+class DailyCalendarCard extends ConsumerStatefulWidget with CommonState, CommonEvent {
   const DailyCalendarCard({super.key});
 
   @override

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../ui/common/navigation/nav_screens.dart';
+import '../../ui/root/not_found_screen.dart';
 import '../../ui/root/root_scaffold.dart';
 
 class AppGoRouter {
@@ -25,7 +26,7 @@ class AppGoRouter {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: "/appointments",
+                path: "/schedule",
                 pageBuilder: (context, state) =>
                     MaterialPage(child: navScreens[1].navScreen),
               ),
@@ -34,7 +35,7 @@ class AppGoRouter {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: "/triage",
+                path: "/patients",
                 pageBuilder: (context, state) =>
                     MaterialPage(child: navScreens[2].navScreen),
               ),
@@ -52,9 +53,18 @@ class AppGoRouter {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: "/account",
+                path: "/teamspace",
                 pageBuilder: (context, state) =>
                     MaterialPage(child: navScreens[4].navScreen),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: "/account",
+                pageBuilder: (context, state) =>
+                    MaterialPage(child: navScreens[5].navScreen),
               ),
             ],
           ),
@@ -62,20 +72,22 @@ class AppGoRouter {
       ),
     ],
     redirect: (context, state) {
-      final validWebRoutes = [
+      final validRoutes = [
         '/dashboard',
-        '/appointments',
-        '/triage',
+        '/schedule',
+        '/patients',
         '/filespace',
+        '/teamspace',
         '/account',
-        '/account/settings',
       ];
-      if (!validWebRoutes.contains(state.uri.path)) {
+      if (!validRoutes.contains(state.uri.path)) {
         return '/404';
       } else {
         return null;
       }
     },
+    errorBuilder: (context, state) =>
+        NotFoundScreen(goRouterException: state.error),
   );
 
   GoRouterDelegate getParentGoRouterDelegate() {

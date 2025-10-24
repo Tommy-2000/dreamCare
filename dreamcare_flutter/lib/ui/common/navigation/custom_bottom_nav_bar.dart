@@ -39,8 +39,10 @@ class _CustomBottomNavBarState extends ConsumerState<CustomBottomNavBar> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: List.generate(navScreens.length, (navIndex) {
                   return IconButton(
+                    isSelected: true,
+                    enableFeedback: true,
                     mouseCursor: SystemMouseCursors.click,
-                    icon: Icon(navScreens[navIndex].navScreenIcon),
+                    icon: navScreens[navIndex].navScreenIcon,
                     onPressed: () => {
                       if (kDebugMode) {
                         print("CustomBottomNavBar button has been tapped")

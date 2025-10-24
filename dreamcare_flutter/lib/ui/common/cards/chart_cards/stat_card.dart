@@ -37,13 +37,13 @@ class _StatCardState extends State<StatCard> {
             Text(
               widget.statTitle!,
               style: GoogleFonts.montserrat(
-                color: blackTextColour,
+                color: primaryTextColour,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
             Text(widget.statNumber.toString(), style: GoogleFonts.montserrat(
-              color: blackTextColour,
+              color: primaryTextColour,
               fontSize: 40,
               fontWeight: FontWeight.bold,
             ),),

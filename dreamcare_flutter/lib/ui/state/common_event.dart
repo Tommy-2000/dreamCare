@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../logic/state/common/common_ui_providers.dart';
+import '../../logic/providers/common/common_ui_providers.dart';
 
-mixin class UIEvent {
+mixin class CommonEvent {
 
   // Calendar UI Events
   void updateDay(WidgetRef ref, int dayOffset) {

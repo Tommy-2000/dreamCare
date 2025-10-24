@@ -4,11 +4,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../logic/utils/constants.dart';
 import '../../../styles/colours.dart';
-import '../ui_event.dart';
-import '../ui_state.dart';
+import '../../state/common_event.dart';
+import '../../state/common_state.dart';
 import 'content_card.dart';
 
-class MonthlyCalendarCard extends ConsumerStatefulWidget with UIState, UIEvent {
+class MonthlyCalendarCard extends ConsumerStatefulWidget with CommonState, CommonEvent {
   const MonthlyCalendarCard({super.key});
 
   @override
@@ -19,7 +19,7 @@ class MonthlyCalendarCard extends ConsumerStatefulWidget with UIState, UIEvent {
 class _MonthlyCalendarCardState extends ConsumerState<MonthlyCalendarCard> {
   @override
   Widget build(BuildContext context) {
-    final currentMonth = UIState().watchMonth(ref);
+    final currentMonth = CommonState().watchMonth(ref);
     return ContentCard(
       child: Padding(
         padding: const EdgeInsets.all(cardPadding),
@@ -65,7 +65,7 @@ class _MonthlyCalendarCardState extends ConsumerState<MonthlyCalendarCard> {
                       style: GoogleFonts.montserrat(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
-                        color: blackTextColour,
+                        color: primaryTextColour,
                       ),
                     ),
                   ),
@@ -102,9 +102,9 @@ class CalendarGrid extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentDay = UIState().watchDay(ref);
-    final currentMonth = UIState().watchMonth(ref);
-    final calendarGrid = UIState().watchCalendarGrid(ref);
+    final currentDay = CommonState().watchDay(ref);
+    final currentMonth = CommonState().watchMonth(ref);
+    final calendarGrid = CommonState().watchCalendarGrid(ref);
     return Expanded(
       flex: 12,
       child: GridView.builder(
@@ -142,7 +142,7 @@ class CalendarGrid extends ConsumerWidget {
 }
 
 void changeMonthGrid(WidgetRef ref, int monthOffset, DateTime setMonth) {
-  UIEvent().updateMonth(ref, monthOffset);
-  UIEvent().updateCalendarGrid(ref, setMonth);
+  CommonEvent().updateMonth(ref, monthOffset);
+  CommonEvent().updateCalendarGrid(ref, setMonth);
 }
 

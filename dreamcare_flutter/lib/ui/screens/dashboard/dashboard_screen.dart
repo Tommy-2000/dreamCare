@@ -1,5 +1,3 @@
-import 'dart:math' as Math;
-
 import 'package:gap/gap.dart';
 
 import '../../../logic/utils/constants.dart';
@@ -15,9 +13,10 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../styles/colours.dart';
 import '../../common/cards/monthly_calendar_card.dart';
-import 'dashboard_state.dart';
+import '../../state/dashboard_event.dart';
+import '../../state/dashboard_state.dart';
 
-class DashboardScreen extends ConsumerStatefulWidget with DashboardState {
+class DashboardScreen extends ConsumerStatefulWidget with DashboardState, DashboardEvent {
   const DashboardScreen({super.key});
 
   @override
@@ -39,7 +38,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 style: GoogleFonts.montserrat(
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
-                  color: blackTextColour,
+                  color: primaryTextColour,
                 ),
               ),
             ),

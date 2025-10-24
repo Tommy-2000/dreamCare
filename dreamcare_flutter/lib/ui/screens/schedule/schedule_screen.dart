@@ -1,19 +1,21 @@
-import 'dart:math' as Math;
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../logic/state/common/common_ui_providers.dart';
+import '../../../logic/providers/common/common_ui_providers.dart';
 import '../../../logic/utils/constants.dart';
 import '../../../styles/colours.dart';
-import '../../common/cards/patient_table_card.dart';
+import '../../common/buttons/primary_button.dart';
+import '../../common/cards/persistent_header_card.dart';
 import '../../common/cards/content_card.dart';
 import '../../common/cards/chart_cards/stat_card.dart';
 import '../../common/cards/monthly_calendar_card.dart';
+import '../../state/schedule_event.dart';
+import '../../state/schedule_state.dart';
 
-class ScheduleScreen extends ConsumerStatefulWidget {
+class ScheduleScreen extends ConsumerStatefulWidget with ScheduleState, ScheduleEvent {
   const ScheduleScreen({super.key});
 
   @override
@@ -34,12 +36,25 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
                 style: GoogleFonts.montserrat(
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
-                  color: blackTextColour,
+                  color: primaryTextColour,
                 ),
               ),
             ),
           ),
-          paintHeader("Upcoming Appointments"),
+          SliverGap(5),
+          SliverToBoxAdapter(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                PrimaryButton(buttonText: "Import Member",
+                    buttonIcon: Icon(Icons.cloud_upload_rounded, size: 15.0)),
+                Gap(5),
+                PrimaryButton(buttonText: "New Member",
+                    buttonIcon: Icon(Icons.add_rounded, size: 15.0)),
+              ],
+            ),),
+          SliverGap(5),
+          paintHeaderCard("Upcoming Appointments"),
           SliverGrid(
             gridDelegate: SliverQuiltedGridDelegate(
               crossAxisCount: 32,
@@ -62,65 +77,11 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
               ),
               ContentCard(child: Icon(Icons.read_more_rounded)),
               MonthlyCalendarCard(),
-              PatientTableCard(),
             ]),
           ),
         ],
       ),
     );
   }
-
-  SliverPersistentHeader paintHeader(String headerText) {
-    return SliverPersistentHeader(
-      pinned: true,
-      delegate: _SliverHeaderDelegate(
-        minHeight: 50.0,
-        maxHeight: 75.0,
-        child: Card(
-          color: Colors.tealAccent,
-          child: Center(
-            child: Text(
-              headerText,
-              textAlign: TextAlign.end,
-              style: GoogleFonts.montserrat(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: blackTextColour,
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
 }
 
-class _SliverHeaderDelegate extends SliverPersistentHeaderDelegate {
-  _SliverHeaderDelegate({
-    required this.minHeight,
-    required this.maxHeight,
-    required this.child,
-  });
-  final double minHeight;
-  final double maxHeight;
-  final Widget child;
-  @override
-  double get minExtent => minHeight;
-  @override
-  double get maxExtent => Math.max(maxHeight, minHeight);
-  @override
-  Widget build(
-    BuildContext context,
-    double shrinkOffset,
-    bool overlapsContent,
-  ) {
-    return SizedBox.expand(child: child);
-  }
-
-  @override
-  bool shouldRebuild(_SliverHeaderDelegate oldDelegate) {
-    return maxHeight != oldDelegate.maxHeight ||
-        minHeight != oldDelegate.minHeight ||
-        child != oldDelegate.child;
-  }
-}

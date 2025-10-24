@@ -31,7 +31,7 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
                   style: GoogleFonts.montserrat(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
-                    color: blackTextColour,
+                    color: primaryTextColour,
                   ),
                 ),
               ],

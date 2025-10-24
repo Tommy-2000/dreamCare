@@ -1,8 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../logic/state/common/common_ui_providers.dart';
+import '../../logic/providers/common/common_ui_providers.dart';
 
-mixin class UIState {
+mixin class CommonState {
+
+  String testText(WidgetRef ref) => ref.watch(testTextProvider);
 
   // Calendar state
   DateTime watchDay(WidgetRef ref) => ref.watch(currentDayProvider);
